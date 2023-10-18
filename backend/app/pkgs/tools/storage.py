@@ -5,9 +5,7 @@ def set(key, value):
     session.update
 
 def get(key):
-    if key in session:
-        return session[key]
-    return None
+    return session[key] if key in session else None
 
 def pop(key):
     session.pop(key)

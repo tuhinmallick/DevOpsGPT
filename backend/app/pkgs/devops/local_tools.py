@@ -17,33 +17,17 @@ def getFileContent(file_path, repopath):
     return True, content 
 
 def compileCheck(requirementID, ws_path,repo_path):
-    if GRADE == "base":
-        obj = LocalToolsBase()
-    else:
-        obj = LocalToolsPro()
-        
+    obj = LocalToolsBase() if GRADE == "base" else LocalToolsPro()
     return obj.compileCheck(requirementID, ws_path,repo_path)
 
 def lintCheck(requirementID, ws_path, repo_path, file_path):
-    if GRADE == "base":
-        obj = LocalToolsBase()
-    else:
-        obj = LocalToolsPro()
-        
+    obj = LocalToolsBase() if GRADE == "base" else LocalToolsPro()
     return obj.lintCheck(requirementID, ws_path, repo_path, file_path)
 
 def unitTest(requirementID, ws_path, repo_path, file_path):
-    if GRADE == "base":
-        obj = LocalToolsBase()
-    else:
-        obj = LocalToolsPro()
-        
+    obj = LocalToolsBase() if GRADE == "base" else LocalToolsPro()
     return obj.unitTest(requirementID, ws_path, repo_path, file_path)
 
 def apiTest(requirementID, ws_path, repo_path, file_path):
-    if GRADE == "base":
-        obj = LocalToolsBase()
-    else:
-        obj = LocalToolsPro()
-        
+    obj = LocalToolsBase() if GRADE == "base" else LocalToolsPro()
     return obj.apiTest(requirementID, ws_path, repo_path, file_path)

@@ -45,7 +45,7 @@ def getServiceBasePrompt(appID, serviceName):
                 currentServiceStr = "and you are responsible for the development of "+service["name"]+" services. The service uses the "+service["language"]+" language and is developed under the "+service["framework"]+" framework"
 
         serviceNameStr = ','.join(service_names)
-        appBasePrompt = "The application consists of "+serviceNameStr+" services, "+currentServiceStr
+        appBasePrompt = f"The application consists of {serviceNameStr} services, {currentServiceStr}"
 
     return appBasePrompt, True
 
@@ -82,33 +82,17 @@ def getServiceDockerImage(appID, serviceName):
     return gitWorkflow, True
 
 def getServiceLib(appID, serviceName):
-    if GRADE == "base":
-        obj = AppInfoBasic()
-    else:
-        obj = AppInfoPro()
-
+    obj = AppInfoBasic() if GRADE == "base" else AppInfoPro()
     return obj.getServiceLib(appID, serviceName)
 
 def getServiceStruct(appID, serviceName):
-    if GRADE == "base":
-        obj = AppInfoBasic()
-    else:
-        obj = AppInfoPro()
-
+    obj = AppInfoBasic() if GRADE == "base" else AppInfoPro()
     return obj.getServiceStruct(appID, serviceName)
 
 def getServiceSpecification(appID, serviceName, LibName):
-    if GRADE == "base":
-        obj = AppInfoBasic()
-    else:
-        obj = AppInfoPro()
-
+    obj = AppInfoBasic() if GRADE == "base" else AppInfoPro()
     return obj.getServiceSpecification(appID, serviceName, LibName)
 
 def analyzeService(tenant_id, gitPath):
-    if GRADE == "base":
-        obj = AppInfoBasic()
-    else:
-        obj = AppInfoPro()
-
+    obj = AppInfoBasic() if GRADE == "base" else AppInfoPro()
     return obj.analyzeService(tenant_id, gitPath)

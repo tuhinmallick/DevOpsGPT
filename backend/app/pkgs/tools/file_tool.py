@@ -4,7 +4,7 @@ from config import WORKSPACE_PATH
 
 
 def read_file_content(filename):
-    print("read_file_content:" + filename)
+    print(f"read_file_content:{filename}")
     try:
         with open(filename, 'r', encoding='utf-8') as f:
             content = f.read()
@@ -16,7 +16,7 @@ def read_file_content(filename):
 
 
 def write_file_content(filename, content):
-    print("write_file_content:" + filename)
+    print(f"write_file_content:{filename}")
     directory = os.path.dirname(filename)
     os.makedirs(directory, exist_ok=True)
     with open(filename, 'w', encoding='utf-8') as f:
