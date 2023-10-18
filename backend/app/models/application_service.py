@@ -31,10 +31,9 @@ class ApplicationService(db.Model):
 
     LANGUAGE_JAVA = "Java"
 
-    def create_service(app_id, name, git_path, git_workflow, role, language, framework, database_type, api_type, api_location,
-                       cd_container_name, cd_container_group, cd_region, cd_public_ip, cd_security_group, cd_subnet, struct_cache, cd_default_image="", service_type=""):
+    def create_service(self, name, git_path, git_workflow, role, language, framework, database_type, api_type, api_location, cd_container_name, cd_container_group, cd_region, cd_public_ip, cd_security_group, cd_subnet, struct_cache, cd_default_image="", service_type=""):
         service = ApplicationService(
-            app_id=app_id,
+            self=self,
             name=name,
             git_path=git_path,
             service_type=service_type,
@@ -53,7 +52,7 @@ class ApplicationService(db.Model):
             cd_security_group=cd_security_group,
             cd_subnet=cd_subnet,
             cd_default_image=cd_default_image,
-            struct_cache=struct_cache
+            struct_cache=struct_cache,
         )
         db.session.add(service)
         db.session.commit()
@@ -101,8 +100,7 @@ class ApplicationService(db.Model):
         return service_dict
 
     def update_service(self, service_id, **kwargs):
-        service = self.query.get(service_id)
-        if service:
+        if service := self.query.get(service_id):
             for key, value in kwargs.items():
                 setattr(service, key, value)
             db.session.commit()
@@ -111,8 +109,7 @@ class ApplicationService(db.Model):
 
     @classmethod
     def delete_service(cls, service_id):
-        service = cls.query.get(service_id)
-        if service:
+        if service := cls.query.get(service_id):
             db.session.delete(service)
             db.session.commit()
             return True

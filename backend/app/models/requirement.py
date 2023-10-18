@@ -66,9 +66,7 @@ class Requirement(db.Model):
 
     @staticmethod
     def get_requirement_by_id(requirement_id, tenant_id=0):
-        tenant_id = int(tenant_id)
-        req = Requirement.query.get(requirement_id)
-        if req:
+        if req := Requirement.query.get(requirement_id):
             req_dict = {
                     'requirement_id': req.requirement_id,
                     'requirement_name': req.requirement_name,
@@ -85,9 +83,8 @@ class Requirement(db.Model):
                     'updated_at': str(req.updated_at),
                     'app': Application.get_application_by_id(req.app_id)
                 }
-            if tenant_id and tenant_id != req_dict["tenant_id"]:
-                return None
-            return req_dict
+            tenant_id = int(tenant_id)
+            return None if tenant_id and tenant_id != req_dict["tenant_id"] else req_dict
         return None
 
     @staticmethod
